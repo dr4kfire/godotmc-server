@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://df2f6owvftk5l"]
+
+[ext_resource type="Script" uid="uid://bnxxxbk5ncl22" path="res://src/minecraft_server.gd" id="1_ch3hw"]
+[ext_resource type="Script" uid="uid://b6b04ouxhv2vw" path="res://src/networking/tcp-server-handler.gd" id="1_yo2kg"]
+[ext_resource type="Script" uid="uid://c80nngj4wr7di" path="res://src/networking/connection-handler.gd" id="2_qqihe"]
+[ext_resource type="Script" uid="uid://ciwo16t500spn" path="res://src/networking/packets-handler.gd" id="3_62d5y"]
+
+[node name="MinecraftServer" type="Node" unique_id=1144804523 node_paths=PackedStringArray("tcp_server_handler", "connection_handler")]
+script = ExtResource("1_ch3hw")
+tcp_server_handler = NodePath("MCTCPServerHandler")
+connection_handler = NodePath("MCTCPServerHandler/ConnectionHandler")
+
+[node name="MCTCPServerHandler" type="Node" parent="." unique_id=968505333]
+script = ExtResource("1_yo2kg")
+metadata/_custom_type_script = "uid://b6b04ouxhv2vw"
+
+[node name="ConnectionHandler" type="Node" parent="MCTCPServerHandler" unique_id=181853748 node_paths=PackedStringArray("server")]
+script = ExtResource("2_qqihe")
+server = NodePath("..")
+metadata/_custom_type_script = "uid://c80nngj4wr7di"
+
+[node name="PacketsHandler" type="Node" parent="MCTCPServerHandler" unique_id=385921080 node_paths=PackedStringArray("connection_handler")]
+script = ExtResource("3_62d5y")
+connection_handler = NodePath("../ConnectionHandler")
+metadata/_custom_type_script = "uid://ciwo16t500spn"
+
+[connection signal="new_packet_recieved" from="MCTCPServerHandler/ConnectionHandler" to="MCTCPServerHandler/PacketsHandler" method="handle_incomming_packet"]
