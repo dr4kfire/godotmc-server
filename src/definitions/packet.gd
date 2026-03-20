@@ -9,6 +9,10 @@ enum FIELD_NAMES {
 	ID = MCTypes.UNSIGNED_SHORT,
 	DATA,
 	}
+enum PACKET_IDS {
+	STATUS = 0x00,
+	PING = 0x01,
+	}
 
 @export var raw_packet: PackedByteArray = []
 @export var fields: Dictionary[FIELD_NAMES, Variant]
@@ -27,7 +31,7 @@ static func decode_packet(raw: PackedByteArray) -> Packet:
 		}
 	return new_packet
 
-enum PACKET_IDS {
-	STATUS = 0x00,
-	PING = 0x01,
-	}
+
+static func get_packet_length(packet_stream: PackedByteArray) -> int:
+	var len_decode := MCTypes.decode_varint(packet_stream)
+	return len_decode.value as int

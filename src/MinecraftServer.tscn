@@ -19,9 +19,10 @@ script = ExtResource("2_qqihe")
 server = NodePath("..")
 metadata/_custom_type_script = "uid://c80nngj4wr7di"
 
-[node name="PacketsHandler" type="Node" parent="MCTCPServerHandler" unique_id=385921080 node_paths=PackedStringArray("connection_handler")]
+[node name="PacketsHandler" type="Node" parent="MCTCPServerHandler" unique_id=385921080 node_paths=PackedStringArray("minecraft_server", "connection_handler")]
 script = ExtResource("3_62d5y")
+minecraft_server = NodePath("../..")
 connection_handler = NodePath("../ConnectionHandler")
 metadata/_custom_type_script = "uid://ciwo16t500spn"
 
-[connection signal="new_packet_received" from="MCTCPServerHandler/ConnectionHandler" to="MCTCPServerHandler/PacketsHandler" method="handle_incomming_packet"]
+[connection signal="connection_bytes_avaliable" from="MCTCPServerHandler/ConnectionHandler" to="MCTCPServerHandler/PacketsHandler" method="get_incomming_bytes"]
