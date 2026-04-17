@@ -1,7 +1,7 @@
 ## Handles stuff like the tcp server etc.
 
 @icon("uid://pgi0jn07dos0") ## chain_command_block.png
-class_name MCTCPServerHandler
+class_name TCPServerHandler
 extends Minecraft
 
 

@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bo740j2304xcq"]
+
+[ext_resource type="Script" uid="uid://bhhryn6wreth2" path="res://src/dot_server.gd" id="1_uljt8"]
+
+[node name="DotServer" type="Node" unique_id=1717295170]
+script = ExtResource("1_uljt8")
+metadata/_custom_type_script = "uid://bhhryn6wreth2"
+
+[node name="Backend" type="Node" parent="." unique_id=2006910142]
+
+[node name="TCPServer" type="Node" parent="Backend" unique_id=688780765]
+
+[node name="ConnectionHandler" type="Node" parent="Backend/TCPServer" unique_id=1471016187]
+
+[node name="PacketsHandler" type="Node" parent="Backend/TCPServer" unique_id=1600610391]
+
+[node name="Game" type="Node" parent="Backend" unique_id=1139032155]
+
+[node name="Frontend" type="Node" parent="." unique_id=671484922]
+
+[node name="Server" type="Node" parent="Frontend" unique_id=1392486031]
+
+[node name="WorldCreator" type="Node" parent="Frontend" unique_id=1101774028]
+
+[node name="API" type="Node" parent="." unique_id=2132596568]
+
+[node name="PaperAPI" type="Node" parent="API" unique_id=1021033260]

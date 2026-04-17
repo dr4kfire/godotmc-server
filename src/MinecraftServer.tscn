@@ -5,24 +5,22 @@
 [ext_resource type="Script" uid="uid://c80nngj4wr7di" path="res://src/networking/connection-handler.gd" id="2_qqihe"]
 [ext_resource type="Script" uid="uid://ciwo16t500spn" path="res://src/networking/packets-handler.gd" id="3_62d5y"]
 
-[node name="MinecraftServer" type="Node" unique_id=1144804523 node_paths=PackedStringArray("tcp_server_handler", "connection_handler")]
+[node name="MinecraftServer" type="Node" unique_id=1144804523]
 script = ExtResource("1_ch3hw")
-tcp_server_handler = NodePath("MCTCPServerHandler")
-connection_handler = NodePath("MCTCPServerHandler/ConnectionHandler")
 
-[node name="MCTCPServerHandler" type="Node" parent="." unique_id=968505333]
+[node name="TCPServerHandler" type="Node" parent="." unique_id=968505333]
 script = ExtResource("1_yo2kg")
 metadata/_custom_type_script = "uid://b6b04ouxhv2vw"
 
-[node name="ConnectionHandler" type="Node" parent="MCTCPServerHandler" unique_id=181853748 node_paths=PackedStringArray("server")]
+[node name="ConnectionHandler" type="Node" parent="TCPServerHandler" unique_id=181853748 node_paths=PackedStringArray("server")]
 script = ExtResource("2_qqihe")
 server = NodePath("..")
 metadata/_custom_type_script = "uid://c80nngj4wr7di"
 
-[node name="PacketsHandler" type="Node" parent="MCTCPServerHandler" unique_id=385921080 node_paths=PackedStringArray("minecraft_server", "connection_handler")]
+[node name="PacketsHandler" type="Node" parent="TCPServerHandler" unique_id=385921080 node_paths=PackedStringArray("minecraft_server", "connection_handler")]
 script = ExtResource("3_62d5y")
 minecraft_server = NodePath("../..")
 connection_handler = NodePath("../ConnectionHandler")
 metadata/_custom_type_script = "uid://ciwo16t500spn"
 
-[connection signal="connection_bytes_avaliable" from="MCTCPServerHandler/ConnectionHandler" to="MCTCPServerHandler/PacketsHandler" method="get_incomming_bytes"]
+[connection signal="connection_bytes_avaliable" from="TCPServerHandler/ConnectionHandler" to="TCPServerHandler/PacketsHandler" method="get_incomming_bytes"]
