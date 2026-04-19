@@ -1,37 +1,36 @@
 ## Base class for all packet resources
 
-@icon("uid://b4y87s026solw") ## chest.png
+@icon("res://assets/chest.png")
 class_name Packet
 extends Resource
 
-enum FIELD_NAMES {
-	LENGTH = MCTypes.VARINT,
-	ID = MCTypes.UNSIGNED_SHORT,
-	DATA,
-	}
-enum PACKET_IDS {
+
+enum {
 	STATUS = 0x00,
-	PING = 0x01,
+	PING   = 0x01,
 	}
 
-@export var raw_packet: PackedByteArray = []
-@export var fields: Dictionary[FIELD_NAMES, Variant]
+
+var author: StreamPeerTCP
+@export var is_zlib_compressed: bool = false
+@export var data_length: int = -1
+@export var packet_id: int = -1
+@export var packet_data: PackedByteArray
+
+var _original_data: PackedByteArray
 
 
-static func decode_packet(raw: PackedByteArray) -> Packet:
-	var len_decode := MCTypes.decode_varint(raw, 0)
-	if len_decode.error != OK:
-		return null
+static func decode_packet(data: PackedByteArray) -> Packet:
+	var raw_packet: PackedByteArray = data.duplicate()
+	var translated_packet: Packet = Packet.new()
 	
-	var new_packet: Packet = Packet.new()
-	new_packet.fields = {
-		FIELD_NAMES.LENGTH: len_decode.value,
-		FIELD_NAMES.ID: raw.decode_u8(len_decode.byte_length),
-		FIELD_NAMES.DATA: raw.slice(len_decode.byte_length+1),
-		}
-	return new_packet
-
-
-static func get_packet_length(packet_stream: PackedByteArray) -> int:
-	var len_decode := MCTypes.decode_varint(packet_stream)
-	return len_decode.value as int
+	var len_result := MCTypes.decode_varint(raw_packet)
+	translated_packet.data_length = len_result.value as int
+	raw_packet = raw_packet.slice(len_result.byte_length)
+	
+	var id_result := MCTypes.decode_varint(raw_packet)
+	translated_packet.packet_id = id_result.value as int
+	
+	translated_packet.packet_data = raw_packet.slice(id_result.byte_length)
+	translated_packet._original_data = data
+	return translated_packet

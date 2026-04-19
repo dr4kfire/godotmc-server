@@ -1,20 +1,32 @@
 [gd_scene format=3 uid="uid://bo740j2304xcq"]
 
 [ext_resource type="Script" uid="uid://bhhryn6wreth2" path="res://src/dot_server.gd" id="1_uljt8"]
+[ext_resource type="Script" uid="uid://bcwmimj22rp0q" path="res://src/backend/tcp_server.gd" id="2_6kcy6"]
+[ext_resource type="Script" uid="uid://crqfpssku0ods" path="res://src/backend/backend.gd" id="2_l3ogq"]
+[ext_resource type="Script" uid="uid://cpq2osb4ni328" path="res://src/backend/packets_handler.gd" id="3_thu4r"]
+[ext_resource type="Script" uid="uid://bue8l3yux7aay" path="res://src/backend/clients_handler.gd" id="5_twwoa"]
 
 [node name="DotServer" type="Node" unique_id=1717295170]
 script = ExtResource("1_uljt8")
 metadata/_custom_type_script = "uid://bhhryn6wreth2"
 
-[node name="Backend" type="Node" parent="." unique_id=2006910142]
+[node name="DotBackend" type="Node" parent="." unique_id=1308793253]
+script = ExtResource("2_l3ogq")
+metadata/_custom_type_script = "uid://crqfpssku0ods"
 
-[node name="TCPServer" type="Node" parent="Backend" unique_id=688780765]
+[node name="PacketsHandler" type="Node" parent="DotBackend" unique_id=1466371395]
+script = ExtResource("3_thu4r")
+metadata/_custom_type_script = "uid://cpq2osb4ni328"
 
-[node name="ConnectionHandler" type="Node" parent="Backend/TCPServer" unique_id=1471016187]
+[node name="TCPServerHandler" type="Node" parent="DotBackend" unique_id=939397008]
+script = ExtResource("2_6kcy6")
+metadata/_custom_type_script = "uid://bcwmimj22rp0q"
 
-[node name="PacketsHandler" type="Node" parent="Backend/TCPServer" unique_id=1600610391]
+[node name="ClientsHandler" type="Node" parent="DotBackend" unique_id=1965941294]
+script = ExtResource("5_twwoa")
+metadata/_custom_type_script = "uid://bue8l3yux7aay"
 
-[node name="Game" type="Node" parent="Backend" unique_id=1139032155]
+[node name="Game" type="Node" parent="DotBackend" unique_id=1139032155]
 
 [node name="Frontend" type="Node" parent="." unique_id=671484922]
 
@@ -25,3 +37,6 @@ metadata/_custom_type_script = "uid://bhhryn6wreth2"
 [node name="API" type="Node" parent="." unique_id=2132596568]
 
 [node name="PaperAPI" type="Node" parent="API" unique_id=1021033260]
+
+[connection signal="send_pong_answer" from="DotBackend/PacketsHandler" to="DotBackend/TCPServerHandler" method="send_packet"]
+[connection signal="packet_recieved" from="DotBackend/TCPServerHandler" to="DotBackend/PacketsHandler" method="_on_packet_recieved"]

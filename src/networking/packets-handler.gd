@@ -2,7 +2,6 @@
 ## constructs response packets
 
 @icon("uid://c3b7s0x2b4fcu") ## chest_minecart.png
-class_name PacketsHandler
 extends Minecraft
 
 
