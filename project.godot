@@ -14,7 +14,6 @@ config/name="GodotMC Server REFACTOR"
 config/description="An OpenSource Godot Engine implementation of the Minecraft Java edition server made by catnip (Dr4kfire)!"
 config/version="b1.0_031926-1.21.11"
 config/tags=PackedStringArray("minecraft", "opensource", "server")
-run/main_scene="uid://df2f6owvftk5l"
 run/print_header=false
 config/features=PackedStringArray("4.6", "GL Compatibility")
 run/low_processor_mode=true
@@ -22,10 +21,6 @@ boot_splash/show_image=false
 boot_splash/stretch_mode=0
 boot_splash/use_filter=false
 config/icon="res://icon.svg"
-
-[autoload]
-
-SupportedVersions="*uid://cp8otvw7mwjbh"
 
 [display]
 

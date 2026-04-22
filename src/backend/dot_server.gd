@@ -7,6 +7,7 @@ const SERVER_VERSION: String = "1.21.10-b0.0.1"
 const BUILD_NUMBER: String = "2026-APR-18+1" ## yyyy-MMM-dd+n
 
 #@export var offline_mode: bool = false
+@export_range(0, 65553) var used_port: int = 25565
 @export var cross_platform_mode: bool = false
 @export var backwards_compatible: bool = false
 @export_enum("1.21.10") var compatibility_version: String = "1.21.10"

@@ -67,7 +67,7 @@ static func decode_varint_from_stream(stream: StreamPeerTCP) -> DecodeReturn:
 	const SEGMENT_MASK := 0x7f
 	const CONTINUE_BIT := 0x80
 	
-	if stream.get_available_bytes() < 1:
+	if stream.get_available_bytes() <= 0:
 		return DecodeReturn.quick(ERR_UNAVAILABLE)
 	
 	var result: DecodeReturn = DecodeReturn.quick(OK, 0, 0, TYPE_INT)
