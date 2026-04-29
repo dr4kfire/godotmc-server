@@ -1,6 +1,6 @@
 @icon("res://assets/chest_minecart.png")
 class_name PacketsHandler
-extends Networking
+extends Node
 
 
 signal send_packet(reciever: Client, packet: PackedByteArray)

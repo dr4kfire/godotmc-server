@@ -1,6 +1,6 @@
 @icon("res://assets/chain_command_block.png")
 class_name TCPServerHandler
-extends Networking
+extends Node
 
 
 signal client_connected(client: StreamPeerTCP)

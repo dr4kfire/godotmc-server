@@ -10,7 +10,25 @@ class_name MCTypes
 extends Minecraft
 
 
-enum { ## TYPES
+enum TYPES {
+	BYTE,
+	UNSIGNED_BYTE,
+	BOOLEAN,
+	SHORT,
+	UNSIGNED_SHORT,
+	INT,
+	LONG,
+	FLOAT,
+	DOUBLE,
+	STRING,
+	TEXT_COMPONENT,
+	JSON_TEXT_COMPONENT,
+	VARINT,
+	VARLONG,
+	}
+
+
+enum { ## TYPES by sizes
 	BYTE = 1,                ## INT8
 	UNSIGNED_BYTE = BYTE,    ## UNSIGNED INT8
 	BOOLEAN = BYTE,          ## INT8

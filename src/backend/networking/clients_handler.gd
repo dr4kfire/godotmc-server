@@ -1,6 +1,6 @@
 @icon("res://assets/oak_boat.png")
 class_name ClientsHandler
-extends Networking
+extends Node
 
 
 signal client_sent_packet(data: PackedByteArray, source: Client)
