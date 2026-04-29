@@ -25,12 +25,12 @@ func _ready() -> void:
 
 func _on_networking_new_packet_recieved(ip: String, packet: PackedByteArray) -> void:
 	Printer.print_log("Recieved a packet from ip: %s" % ip)
-	Printer.print_log("Recieved packet: \n%s\n" % Hexy.format_to_xxd(packet))
+	Printer.print_log("Recieved packet: \n       %s" % Hexy.format_to_xxd(packet))
 	var response := _protocol_handler.get_status_mode_response(packet)
-	if response == null:
+	if response.is_empty():
 		return
 	var err := _networking.send_packet(ip, response)
 	if err:
 		Printer.print_warning("Couldn't send a response packet: %s" % error_string(err))
 		return
-	Printer.print_log("Answered with response packet: \n%s\n" % Hexy.format_to_xxd(packet))
+	Printer.print_log("Answered with response packet: \n       %s" % Hexy.format_to_xxd(packet))

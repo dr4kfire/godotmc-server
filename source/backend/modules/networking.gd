@@ -35,7 +35,6 @@ func _process(_dt: float) -> void:
 	while _server.is_connection_available():
 		var new_stream := _server.take_connection()
 		new_stream.set_no_delay(true)
-		print("Connection taken: ", new_stream.get_connected_host())
 		active_connections.append(new_stream)
 		_validate_or_remove_stream_buffer(new_stream)
 	
@@ -44,7 +43,6 @@ func _process(_dt: float) -> void:
 		stream.poll()
 		
 		if stream.get_status() != StreamPeerTCP.STATUS_CONNECTED:
-			print("Peer not connected - closing connection")
 			active_connections.remove_at(i)
 			_validate_or_remove_stream_buffer(stream)
 			continue
@@ -52,7 +50,6 @@ func _process(_dt: float) -> void:
 		var packet: PackedByteArray = _try_read_packet(stream)
 		if packet.size() > 0:
 			var client_ip: String = stream.get_connected_host()
-			Hexy.printxxd(packet)
 			new_packet_recieved.emit(client_ip, packet)
 		
 		_validate_or_remove_stream_buffer(stream)
@@ -79,7 +76,6 @@ func disconnect_peer(ip: String) -> Error:
 func send_packet(ip: String, packet: PackedByteArray) -> Error:
 	var found_stream := _find_stream_by_ip(ip)
 	if found_stream:
-		Hexy.printxxd(packet)
 		var full_packet := MCTypes.encode_varint(packet.size())
 		full_packet.append_array(packet)
 		return found_stream.put_data(full_packet)

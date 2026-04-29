@@ -24,6 +24,8 @@ enum login_ids {
 
 func get_status_mode_response(packet: PackedByteArray) -> PackedByteArray:
 	var packet_id: int = _decode_protocol_id(packet)
+	if packet_id == -1:
+		return []
 	match packet_id:
 		status_ids.STATUS_REQUEST:
 			var data: Dictionary = {
@@ -47,7 +49,8 @@ func get_status_mode_response(packet: PackedByteArray) -> PackedByteArray:
 			return response
 		status_ids.PING_REQUEST:
 			return packet
-	return []
+		_:
+			return []
 
 
 func _decode_protocol_id(packet: PackedByteArray) -> int:
