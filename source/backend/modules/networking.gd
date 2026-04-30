@@ -44,15 +44,12 @@ func _process(_dt: float) -> void:
 		
 		if stream.get_status() != StreamPeerTCP.STATUS_CONNECTED:
 			active_connections.remove_at(i)
-			_validate_or_remove_stream_buffer(stream)
 			continue
 		
 		var packet: PackedByteArray = _try_read_packet(stream)
 		if packet.size() > 0:
 			var client_ip: String = stream.get_connected_host()
 			new_packet_recieved.emit(client_ip, packet)
-		
-		_validate_or_remove_stream_buffer(stream)
 
 
 func change_listening_state(listen: bool, port: int = 25565) -> Error:
@@ -68,6 +65,7 @@ func disconnect_peer(ip: String) -> Error:
 	var found_stream := _find_stream_by_ip(ip)
 	if found_stream:
 		found_stream.disconnect_from_host()
+		_validate_or_remove_stream_buffer(found_stream)
 		return OK
 	else:
 		return ERR_DOES_NOT_EXIST

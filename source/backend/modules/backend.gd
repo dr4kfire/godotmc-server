@@ -13,24 +13,24 @@ extends BackendModule
 
 
 func _ready() -> void:
-	Printer.print_log("Server is starting ...")
+	Printer.printlog("Server is starting ...")
 	var err := _networking.change_listening_state(true)
 	if err:
-		Printer.print_error(
+		Printer.printerror(
 				"An error occured while attempting to listen on port %s: %s" %\
 				[25565, error_string(err)])
 		return
-	Printer.print_log("Server has started successfuly!")
+	Printer.printlog("Server has started successfuly!")
 
 
 func _on_networking_new_packet_recieved(ip: String, packet: PackedByteArray) -> void:
-	Printer.print_log("Recieved a packet from ip: %s" % ip)
-	Printer.print_log("Recieved packet: \n       %s" % Hexy.format_to_xxd(packet))
-	var response := _protocol_handler.get_status_mode_response(packet)
+	Printer.printlog("Recieved a packet from ip: %s" % ip)
+	Printer.printlog("Recieved packet: \n%s" % Hexy.format_to_xxd(packet))
+	var response: PackedByteArray = _protocol_handler.get_status_mode_response(packet)
 	if response.is_empty():
 		return
 	var err := _networking.send_packet(ip, response)
 	if err:
-		Printer.print_warning("Couldn't send a response packet: %s" % error_string(err))
+		Printer.printwarning("Couldn't send a response packet: %s" % error_string(err))
 		return
-	Printer.print_log("Answered with response packet: \n       %s" % Hexy.format_to_xxd(packet))
+	Printer.printlog("Answered with response packet: \n%s" % Hexy.format_to_xxd(response))

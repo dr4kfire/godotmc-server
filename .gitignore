@@ -1,3 +1,5 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+project_time_tracker.json
+addons/project-time-tracker

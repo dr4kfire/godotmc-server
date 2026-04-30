@@ -24,10 +24,12 @@ enum login_ids {
 
 func get_status_mode_response(packet: PackedByteArray) -> PackedByteArray:
 	var packet_id: int = _decode_protocol_id(packet)
+	Printer.printdebug("Recieved decoded protocol id: %s" % packet_id)
 	if packet_id == -1:
 		return []
 	match packet_id:
 		status_ids.STATUS_REQUEST:
+			Printer.printdebug("Protocol match found with STATUS_REQUEST for %s" % packet_id)
 			var data: Dictionary = {
 				"version": {
 					"name": "1.21.10",
@@ -46,10 +48,14 @@ func get_status_mode_response(packet: PackedByteArray) -> PackedByteArray:
 			var string := MCTypes.encode_string(JSON.stringify(data))
 			var response: PackedByteArray = [0]
 			response.append_array(string)
+			Printer.printdebug("Created a response packet:\n[/color]%s" % Hexy.format_to_xxd(response))
 			return response
+		
 		status_ids.PING_REQUEST:
+			Printer.printdebug("Protocol match found with PING_REQUEST for %s" % packet_id)
 			return packet
 		_:
+			Printer.printdebug("No protocol match found for %s" % packet_id)
 			return []
 
 
