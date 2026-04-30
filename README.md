@@ -7,6 +7,12 @@ and experiences. **NO AI** was used in creation of this project.
 These are the things that are implemented right now
 - none :P
 
+### 🏃 RUNNING:
+- clone the repositority 
+- either:
+	- open and run project via Godot GUI
+	- move into project folder and run `godot .` command
+
 ### 🎯 ROADMAP:
 This is a (somewhat chronological) list of the next features
 - Server listing information
