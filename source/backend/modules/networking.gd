@@ -50,6 +50,7 @@ func _process(_dt: float) -> void:
 		if packet.size() > 0:
 			var client_ip: String = stream.get_connected_host()
 			new_packet_recieved.emit(client_ip, packet)
+			stream.poll()
 
 
 func change_listening_state(listen: bool, port: int = 25565) -> Error:
@@ -90,6 +91,8 @@ func _try_read_packet(stream: StreamPeerTCP) -> PackedByteArray:
 	if packet_len != -1:
 		if stream.get_available_bytes() >= packet_len:
 			var request: PackedByteArray = stream.get_data(packet_len)[1]
+			buffer["packet_len"] = -1
+			buffer["data"] = PackedByteArray()
 			return request
 	else:
 		var next_byte := stream.get_u8()

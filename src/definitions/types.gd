@@ -4,7 +4,7 @@
 ## look at https://minecraft.wiki/w/Java_Edition_protocol/Packets
 ## for more info
 
-@icon("uid://ceieefi4pf28n") ## knowledge_book
+@icon("uid://ceieefi4pf28n")
 @abstract
 class_name MCTypes
 extends Minecraft
@@ -27,7 +27,6 @@ enum TYPES {
 	VARLONG,
 	}
 
-
 enum { ## TYPES by sizes
 	BYTE = 1,                ## INT8
 	UNSIGNED_BYTE = BYTE,    ## UNSIGNED INT8
@@ -49,6 +48,16 @@ enum { ## TYPES by sizes
 	VARLONG = 0,             ## 1..10 INT64
 	}
 
+
+# Add this alias function to the MCTypes static methods
+# It wraps encode_varint and returns an EncodeReturn
+static func encode_varint_ex(value: int) -> EncodeReturn:
+	return EncodeReturn.quick(OK, encode_varint(value))
+
+# Add this alias function to the MCTypes static methods
+# It wraps encode_string and returns an EncodeReturn
+static func encode_string_ex(value: String) -> EncodeReturn:
+	return EncodeReturn.quick(OK, encode_string(value))
 
 
 static func decode_boolean(packet: PackedByteArray, offset: int = 0) -> DecodeReturn:
@@ -73,7 +82,9 @@ static func decode_varint(packet: PackedByteArray, offset: int = 0) -> DecodeRet
 		var unmasked_value := (byte & SEGMENT_MASK) << position
 		result.value = result.value | unmasked_value
 		if (byte & CONTINUE_BIT) == 0: 
-			result.byte_length = floori(position/7.0)
+			# BUG FIX: Added + 1. The loop index 'position' increments by 7.
+			# The byte index is position / 7. We need count of bytes read.
+			result.byte_length = floori(position/7.0) + 1
 			break
 		
 		if position + 7 >= 64:
@@ -85,6 +96,7 @@ static func decode_varint_from_stream(stream: StreamPeerTCP) -> DecodeReturn:
 	const SEGMENT_MASK := 0x7f
 	const CONTINUE_BIT := 0x80
 	
+	# Note: It is safer to check available bytes inside the loop or read into a buffer
 	if stream.get_available_bytes() <= 0:
 		return DecodeReturn.quick(ERR_UNAVAILABLE)
 	
@@ -103,13 +115,32 @@ static func decode_varint_from_stream(stream: StreamPeerTCP) -> DecodeReturn:
 
 
 static func decode_string(packet: PackedByteArray, offset: int = 0) -> DecodeReturn:
+	# 1. Decode the VarInt length
 	var result: DecodeReturn = decode_varint(packet, offset)
 	if result.error != OK:
 		return DecodeReturn.quick(result.error)
-	var string_bytes := packet.slice(offset + result.byte_length + 1)
+	
+	var varint_size := result.byte_length
+	var string_length: int = result.value
+	
+	# 2. Calculate string data range
+	# BUG FIX: Removed the + 1. We start reading immediately after the VarInt.
+	var start_index := offset + varint_size
+	var end_index := start_index + string_length
+	
+	# 3. Safety check for buffer bounds
+	if end_index > packet.size():
+		return DecodeReturn.quick(ERR_FILE_EOF)
+		
+	var string_bytes := packet.slice(start_index, end_index)
+	
+	# 4. Return result
 	return DecodeReturn.quick(
-		OK, result.byte_length+string_bytes.size(), 
-		string_bytes.get_string_from_utf8(), TYPE_STRING)
+		OK, 
+		varint_size + string_length, # Total bytes consumed
+		string_bytes.get_string_from_utf8(), 
+		TYPE_STRING
+	)
 
 
 
@@ -138,7 +169,7 @@ static func encode_string(value: String) -> PackedByteArray:
 
 
 
-static func _is_outside_of_range(array: Array, index: int) -> bool:
+static func _is_outside_of_range(array: PackedByteArray, index: int) -> bool:
 	return index >= array.size()
 
 static func _unsigned_right_shift(value: int, shift_ammount: int) -> int:
@@ -161,4 +192,14 @@ class DecodeReturn:
 		new.byte_length = _byte_length
 		new.value = _value
 		new.value_type = _value_type
+		return new
+
+class EncodeReturn:
+	var error: Error = OK
+	var data: PackedByteArray = PackedByteArray()
+	
+	static func quick(_error: Error, _data: PackedByteArray) -> EncodeReturn:
+		var new: EncodeReturn = EncodeReturn.new()
+		new.error = _error
+		new.data = _data
 		return new

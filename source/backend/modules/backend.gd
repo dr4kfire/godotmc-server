@@ -26,7 +26,7 @@ func _ready() -> void:
 func _on_networking_new_packet_recieved(ip: String, packet: PackedByteArray) -> void:
 	Printer.printlog("Recieved a packet from ip: %s" % ip)
 	Printer.printlog("Recieved packet: \n%s" % Hexy.format_to_xxd(packet))
-	var response: PackedByteArray = _protocol_handler.get_status_mode_response(packet)
+	var response: PackedByteArray = _protocol_handler.handle_packet(packet)
 	if response.is_empty():
 		return
 	var err := _networking.send_packet(ip, response)
