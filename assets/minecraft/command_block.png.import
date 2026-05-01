@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ceieefi4pf28n"
-path="res://.godot/imported/knowledge_book.png-f72aec404654f17a9cec8574f3618bba.ctex"
+uid="uid://coqe14yqqclv4"
+path="res://.godot/imported/command_block.png-99d39dddc6f759b9d5b1340291fe2d8c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/knowledge_book.png"
-dest_files=["res://.godot/imported/knowledge_book.png-f72aec404654f17a9cec8574f3618bba.ctex"]
+source_file="res://assets/minecraft/command_block.png"
+dest_files=["res://.godot/imported/command_block.png-99d39dddc6f759b9d5b1340291fe2d8c.ctex"]
 
 [params]
 

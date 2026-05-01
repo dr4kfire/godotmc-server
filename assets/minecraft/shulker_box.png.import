@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c27seqbr0gfta"
-path="res://.godot/imported/comparator.png-44e23ed8467294133157a8a1928825fb.ctex"
+uid="uid://cxrx1t8ffqbnq"
+path="res://.godot/imported/shulker_box.png-bc88e91a11f1cc119ba1545c8028683b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/comparator.png"
-dest_files=["res://.godot/imported/comparator.png-44e23ed8467294133157a8a1928825fb.ctex"]
+source_file="res://assets/minecraft/shulker_box.png"
+dest_files=["res://.godot/imported/shulker_box.png-bc88e91a11f1cc119ba1545c8028683b.ctex"]
 
 [params]
 

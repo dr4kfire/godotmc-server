@@ -1,24 +1,41 @@
-@icon("res://assets/goat_horn.png")
-class_name DotLogger
-extends Object
-## A static class containing usefull methods which check the verbosity level
-## and log based on them
-##
-## Accessable globaly - this class is just using [method print] with diffrent
-## styling as well as what is logged depending on the verbosity level
+@icon("res://assets/icons/clipboard2-pulse-fill.svg")
+class_name BackendLogger
+extends BackendModule
+## A module containing usefull methods which check the verbosity level and log 
+## to the console based on the chosen verbosity level
 
 
 enum verbosity {
 	SILENT,
 	ERROR,
 	WARNING,
+	INFO,
 	DEBUG,
 	}
 
 
-static func printlog(v: verbosity, err: Error) -> void:
-	match v:
-		verbosity.SILENT:
-			return
-		verbosity.ERROR:
-			push_error("")
+var current_verbosity: verbosity = verbosity.DEBUG
+
+
+func logdebug(msg: String) -> void:
+	if current_verbosity < verbosity.DEBUG:
+		return # Turned off
+	print_rich("[color=dark_violet][b][debug]:[/b] %s[/color]" % msg)
+
+
+func loginfo(msg: String) -> void:
+	if current_verbosity < verbosity.INFO:
+		return # Turned off
+	print_rich("[color=white][b][ log ]:[/b] %s[/color]" % msg)
+
+
+func logwarning(msg: String) -> void:
+	if current_verbosity < verbosity.WARNING:
+		return # Turned off
+	print_rich("[color=dark_orange][b][ warn]:[/b] %s[/color]" % msg)
+
+
+func logerror(msg: String) -> void:
+	if current_verbosity < verbosity.ERROR:
+		return # Turned off
+	print_rich("[color=light_coral][b][error]:[/b] %s[/color]" % msg)

@@ -1,51 +1,10 @@
-@icon("uid://ceieefi4pf28n")
-@abstract
-class_name MCTypes
-extends Object
+class_name TypesConverter
+extends UtilsModule
 ## Used for converting PackedByteArrays into Godot readable
 ## types and Godot types into PackedByteArrays
 ##
 ## look at https://minecraft.wiki/w/Java_Edition_protocol/Packets
 ## for more info
-
-
-enum TYPES {
-	BYTE,
-	UNSIGNED_BYTE,
-	BOOLEAN,
-	SHORT,
-	UNSIGNED_SHORT,
-	INT,
-	LONG,
-	FLOAT,
-	DOUBLE,
-	STRING,
-	TEXT_COMPONENT,
-	JSON_TEXT_COMPONENT,
-	VARINT,
-	VARLONG,
-	}
-
-enum { ## TYPES by sizes
-	BYTE = 1,                ## INT8
-	UNSIGNED_BYTE = BYTE,    ## UNSIGNED INT8
-	BOOLEAN = BYTE,          ## INT8
-	   
-	SHORT = 2,               ## INT16
-	UNSIGNED_SHORT = 2,      ## UNSIGNED INT16
-	INT = 4,                 ## INT32
-	LONG = 8,                ## INT64
-	
-	FLOAT = 4,               ## FLOAT (32 bit)
-	DOUBLE = 8,              ## FLOAT (64 bit)
-	
-	STRING = 0,              ## 1..(n*3)+3
-	TEXT_COMPONENT = -1,     ## VARIES
-	JSON_TEXT_COMPONENT = 0, ## 1..32767
-	
-	VARINT = 0,              ## 1..5  INT32
-	VARLONG = 0,             ## 1..10 INT64
-	}
 
 
 # Add this alias function to the MCTypes static methods

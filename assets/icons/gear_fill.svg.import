@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://diciwonksnme3"
-path="res://.godot/imported/minecraft_logo.svg-10399adcc9addbff39029c2d2feddf4d.ctex"
+uid="uid://bjr3vddaj1g0n"
+path="res://.godot/imported/gear_fill.svg-d9ecaf03926f5e385f99e7d886cd2a7f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/minecraft_logo.svg"
-dest_files=["res://.godot/imported/minecraft_logo.svg-10399adcc9addbff39029c2d2feddf4d.ctex"]
+source_file="res://assets/icons/gear_fill.svg"
+dest_files=["res://.godot/imported/gear_fill.svg-d9ecaf03926f5e385f99e7d886cd2a7f.ctex"]
 
 [params]
 
@@ -27,9 +27,9 @@ mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
-process/channel_remap/red=0
-process/channel_remap/green=1
-process/channel_remap/blue=2
+process/channel_remap/red=10
+process/channel_remap/green=10
+process/channel_remap/blue=10
 process/channel_remap/alpha=3
 process/fix_alpha_border=true
 process/premult_alpha=false

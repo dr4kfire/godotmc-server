@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3b7s0x2b4fcu"
-path="res://.godot/imported/chest_minecart.png-064336c875bfdc9269c2cc50e7e25d9d.ctex"
+uid="uid://b4n81yubjhssj"
+path="res://.godot/imported/shulker_shell.png-a2cad61b817d942de322a08bcbb94d9b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/chest_minecart.png"
-dest_files=["res://.godot/imported/chest_minecart.png-064336c875bfdc9269c2cc50e7e25d9d.ctex"]
+source_file="res://assets/minecraft/shulker_shell.png"
+dest_files=["res://.godot/imported/shulker_shell.png-a2cad61b817d942de322a08bcbb94d9b.ctex"]
 
 [params]
 

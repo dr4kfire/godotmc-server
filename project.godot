@@ -37,7 +37,7 @@ display_server/driver.macos="headless"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/project-time-tracker/plugin.cfg")
+enabled=PackedStringArray()
 
 [physics]
 

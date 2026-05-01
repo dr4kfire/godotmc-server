@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4n81yubjhssj"
-path="res://.godot/imported/shulker_shell.png-fa98daaa01c0113dee54ac2c1299c725.ctex"
+uid="uid://dgltuyl48cwo2"
+path="res://.godot/imported/oak_boat.png-e1417ced1d8136bbe0bc205fa24e71b0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/shulker_shell.png"
-dest_files=["res://.godot/imported/shulker_shell.png-fa98daaa01c0113dee54ac2c1299c725.ctex"]
+source_file="res://assets/minecraft/oak_boat.png"
+dest_files=["res://.godot/imported/oak_boat.png-e1417ced1d8136bbe0bc205fa24e71b0.ctex"]
 
 [params]
 
