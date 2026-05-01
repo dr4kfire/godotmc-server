@@ -3,9 +3,12 @@ This is an implementation of the minecraft java server made completly in godot.
 The main focus is to allow easier ways for creating minecraft plugins, servers 
 and experiences. **NO AI** was used in creation of this project.
 
+
 ### 📦 FEATURES:
 These are the things that are implemented right now
 - Status and ping protocols (The server shows up on the list)
+
+---
 
 ### 🏃 RUNNING:
 - clone the repositority 
@@ -13,11 +16,15 @@ These are the things that are implemented right now
 	- open and run project via Godot GUI
 	- move into project folder and run `godot .` command
 
+---
+
 ### 🎯 ROADMAP:
 This is a (somewhat chronological) list of the next features
 - Joining and leaving
 - Sending world data
 - Generating worlds
+
+---
 
 ### 🌱 FUTURE PLANS:
 These features are what I want this project to grow into in the future!
