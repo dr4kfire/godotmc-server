@@ -7,6 +7,14 @@ extends PacketProtocol
 ## this minecraft.wiki article[/url]
 
 
+@export_enum("1.21.10") var version: String = "1.21.10"
+@export var protocol_version: int = 773
+@export var max_players: int = 20
+@export_multiline var description: String = "A Dot Minecraft server :3"
+@export var favicon: Texture2D = preload("res://icon.svg")
+@export var enforcesSecureChat: bool = false
+
+
 enum {
 	ID_STATUS_REQUEST = 0x00,
 	ID_PING_REQUEST = 0x01
@@ -30,32 +38,31 @@ func get_response_packet(_stream: StreamPeerTCP, request: PackedByteArray) -> Pa
 # Private ------------------------------------------------------------------------------------------
 
 func _handle_status_request() -> PackedByteArray:
-	print("Handling Status Request")
+	var image := favicon.get_image()
+	image.resize(64, 64, Image.INTERPOLATE_NEAREST)
+	var base64 := Marshalls.raw_to_base64(image.save_png_to_buffer())
+	
 	var data: Dictionary = {
 		"version": {
-			"name": "1.21.10",
-			"protocol": 773
+			"name": version,
+			"protocol": protocol_version
 		},
 		"players": {
-			"max": 20,
+			"max": max_players,
 			"online": 0
 		},
 		"description": {
-			"text": "A Dot Minecraft server"
+			"text": description
 		},
-		"favicon": "data:image/png;base64,0", # Ensure this is valid base64 or empty
+		"favicon": "data:image/png;base64,%s" % [base64],
 		"enforcesSecureChat": false
 	}
 	var json_string := JSON.stringify(data)
-	
-	var response_payload := PackedByteArray()
-	
 	# Packet ID 0x00 for Response
-	response_payload.append(0x00)
+	var response_payload := PackedByteArray([0x00])
 	# JSON String (VarInt length + String data)
 	var encoded_string := TypesConverter.encode_string(json_string)
 	response_payload.append_array(encoded_string)
-	
 	return response_payload
 
 
