@@ -10,6 +10,7 @@ extends PacketProtocol
 @export_enum("1.21.10") var version: String = "1.21.10"
 @export var protocol_version: int = 773
 @export var max_players: int = 20
+@export var online_players: int = 0
 @export_multiline var description: String = "A Dot Minecraft server :3"
 @export var favicon: Texture2D = preload("res://icon.svg")
 @export var enforcesSecureChat: bool = false
@@ -49,7 +50,7 @@ func _handle_status_request() -> PackedByteArray:
 		},
 		"players": {
 			"max": max_players,
-			"online": 0
+			"online": online_players
 		},
 		"description": {
 			"text": description
