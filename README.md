@@ -5,7 +5,7 @@ and experiences. **NO AI** was used in creation of this project.
 
 ### 📦 FEATURES:
 These are the things that are implemented right now
-- none :P
+- Status and ping protocols (The server shows up on the list)
 
 ### 🏃 RUNNING:
 - clone the repositority 
@@ -15,7 +15,6 @@ These are the things that are implemented right now
 
 ### 🎯 ROADMAP:
 This is a (somewhat chronological) list of the next features
-- Server listing information
 - Joining and leaving
 - Sending world data
 - Generating worlds

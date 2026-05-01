@@ -29,3 +29,5 @@ metadata/_custom_type_script = "uid://c73kgmlomtn1d"
 [node name="Utility" type="Node" parent="." unique_id=11778666]
 
 [node name="Hexy" type="Node" parent="Utility" unique_id=250596236]
+
+[node name="TypesConverter" type="Node" parent="Utility" unique_id=1388622906]
