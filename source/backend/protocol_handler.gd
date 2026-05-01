@@ -1,3 +1,4 @@
+@icon("res://assets/fishing_rod.png")
 class_name ProtocolHandler
 extends BackendModule
 ## Handles protocols of minecraft packets by collecting necessery data for
@@ -6,13 +7,13 @@ extends BackendModule
 ## For more information on each protocol and how they funciton check out 
 ## [url=https://minecraft.wiki/w/Java_Edition_protocol]minecraft.wiki[/url]
 
+
 enum State {
 	HANDSHAKE,
 	STATUS,
 	LOGIN,
 	PLAY
 }
-
 var current_state = State.HANDSHAKE
 
 # Packet IDs
@@ -20,14 +21,15 @@ const HANDSHAKE_ID = 0
 const STATUS_REQUEST_ID = 0
 const PING_REQUEST_ID = 1
 
+
+## CRITICAL: Call this function whenever a client connects or disconnects
 func reset_state():
-	"""Call this when a client disconnects and a new client connects."""
 	current_state = State.HANDSHAKE
 
+
+## This method calls a private function that handles the response by first
+## extracting the protocol id to determine what is the client askking for 
 func handle_packet(packet: PackedByteArray) -> PackedByteArray:
-	# Assuming the length prefix has already been removed by your stream reader
-	# and 'packet' starts with the Packet ID.
-	
 	if packet.is_empty():
 		return []
 

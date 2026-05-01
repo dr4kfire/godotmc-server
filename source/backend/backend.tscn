@@ -1,21 +1,31 @@
 [gd_scene format=3 uid="uid://c2v72uj21r247"]
 
 [ext_resource type="Script" uid="uid://vgr6gth8kkt5" path="res://source/backend/modules/backend.gd" id="1_tpbuf"]
-[ext_resource type="Script" uid="uid://boektkgqso2ou" path="res://source/backend/modules/networking.gd" id="2_hgtar"]
-[ext_resource type="Script" uid="uid://bmlhx8a2xread" path="res://source/backend/protocol_handler.gd" id="3_ik66w"]
+[ext_resource type="Script" uid="uid://c73kgmlomtn1d" path="res://source/backend/modules/logger/logger.gd" id="2_ik66w"]
 
-[node name="Backend" type="Node" unique_id=201930559 node_paths=PackedStringArray("_networking", "_protocol_handler")]
+[node name="Backend" type="Node" unique_id=201930559 node_paths=PackedStringArray("_logger")]
 script = ExtResource("1_tpbuf")
-_networking = NodePath("Networking")
-_protocol_handler = NodePath("ProtocolHandler")
+_logger = NodePath("Logger")
 metadata/_custom_type_script = "uid://vgr6gth8kkt5"
 
-[node name="Networking" type="Node" parent="." unique_id=471070387]
-script = ExtResource("2_hgtar")
-metadata/_custom_type_script = "uid://boektkgqso2ou"
+[node name="Logger" type="Node" parent="." unique_id=632641793]
+script = ExtResource("2_ik66w")
+metadata/_custom_type_script = "uid://c73kgmlomtn1d"
 
-[node name="ProtocolHandler" type="Node" parent="." unique_id=894465574]
-script = ExtResource("3_ik66w")
-metadata/_custom_type_script = "uid://bmlhx8a2xread"
+[node name="Networker" type="Node" parent="." unique_id=168973183]
 
-[connection signal="new_packet_recieved" from="Networking" to="." method="_on_networking_new_packet_recieved"]
+[node name="ServerManager" type="Node" parent="Networker" unique_id=605775022]
+
+[node name="ClientsHandler" type="Node" parent="Networker" unique_id=1855706944]
+
+[node name="PacketRouter" type="Node" parent="Networker" unique_id=1166977335]
+
+[node name="StatusProtocol" type="Node" parent="Networker/PacketRouter" unique_id=84458403]
+
+[node name="LoginProtocol" type="Node" parent="Networker/PacketRouter" unique_id=725434805]
+
+[node name="PlayProtocol" type="Node" parent="Networker/PacketRouter" unique_id=1970696677]
+
+[node name="Utility" type="Node" parent="." unique_id=11778666]
+
+[node name="Hexy" type="Node" parent="Utility" unique_id=250596236]
