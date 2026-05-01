@@ -26,7 +26,6 @@ var _active_streams: Dictionary[StreamPeerTCP, ClientsManager.ProtocolState]
 func disconnect_stream(stream: StreamPeerTCP) -> void:
 	_active_streams.erase(stream)
 	stream.disconnect_from_host()
-	stream.free()
 
 
 ## Updates the stream buffers with new information and disconnects streams that

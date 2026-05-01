@@ -14,7 +14,7 @@ static func xxdlike(data: PackedByteArray) -> String:
 		for i in range(16):
 			var byte_idx := line + i
 			
-			if byte_idx > data.size(): # Outside of range - fill with empty space
+			if byte_idx >= data.size(): # Outside of range - fill with empty space
 				hex_line += "  "
 				ascii_line += " "
 				continue
@@ -33,7 +33,7 @@ static func xxdlike(data: PackedByteArray) -> String:
 			ascii_line += "[color=" + color + "][b]" + ascii_char + "[/b][/color]"
 		
 		# put "0x" in front, pad with 0 for min len of 4 and append the data
-		output += "0x%04x: %s %s" % [str(line), hex_line.rpad(45), ascii_line]
+		output += "0x%04x: %s %s" % [line, hex_line.rpad(45), ascii_line]
 		if line + 16 < data.size():
 			output += "\n"
 		

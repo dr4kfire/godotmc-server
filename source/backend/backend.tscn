@@ -10,9 +10,8 @@
 [ext_resource type="Script" uid="uid://cxm7tmqjeqmtb" path="res://source/backend/modules/networker/packet-protocols/none_protocol.gd" id="6_f2s2a"]
 [ext_resource type="Script" uid="uid://dv3co3qncsbiq" path="res://source/backend/modules/networker/packet-protocols/status_protocol.gd" id="7_jsx54"]
 
-[node name="Backend" type="Node" unique_id=201930559 node_paths=PackedStringArray("_logger")]
+[node name="Backend" type="Node" unique_id=201930559]
 script = ExtResource("1_tpbuf")
-_logger = NodePath("Logger")
 metadata/_custom_type_script = "uid://vgr6gth8kkt5"
 
 [node name="Logger" type="Node" parent="." unique_id=632641793]

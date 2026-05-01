@@ -31,7 +31,7 @@ func take_incomming_connection() -> StreamPeerTCP:
 
 # Packets ------------------------------------------------------------------------------------------
 
-func get_avaliable_packets(stream: StreamPeerTCP) -> PackedByteArray:
+func get_incomming_payload(stream: StreamPeerTCP) -> PackedByteArray:
 	if stream.get_available_bytes() == 0:
 		return []
 	

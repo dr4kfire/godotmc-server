@@ -9,7 +9,7 @@ extends PacketProtocol
 
 func get_response_packet(stream: StreamPeerTCP, request: PackedByteArray) -> PackedByteArray:
 	var packets_router: PacketsRouter = self.get_parent()
-	var intent: int = request.decode_u8(-1) # Never bigger than one byte - read as a normal integer
+	var intent: int = request.decode_u8(request.size()-1) # Never bigger than one byte - read as a normal integer
 	
 	match intent:
 		1:
