@@ -1,6 +1,6 @@
 class_name StatusProtocol
 extends PacketProtocol
-## CRITICAL: Should always be directly placed under the [PacketRouter] that is
+## CRITICAL: Should always be directly placed under the [PacketsRouter] that is
 ## connected with this [PacketProtocol]
 ##
 ## For how this protocol works check [url=https://minecraft.wiki/w/Java_Edition_protocol/Server_List_Ping]

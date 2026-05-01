@@ -4,7 +4,7 @@ class_name PacketProtocol
 extends BackendModule
 ## A base abstract class for protocol handling nodes
 ##
-## CRITICAL: Should always be directly placed under the [PacketRouter] that is
+## CRITICAL: Should always be directly placed under the [PacketsRouter] that is
 ## connected with this [PacketProtocol]
 
 
