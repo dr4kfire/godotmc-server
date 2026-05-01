@@ -5,7 +5,10 @@
 [ext_resource type="Script" uid="uid://bxsvhjksykxj7" path="res://source/backend/modules/networker/server_manager.gd" id="3_27lj5"]
 [ext_resource type="Script" uid="uid://cdhmdvf8g6nrm" path="res://source/utils/bytes_formatter.gd" id="3_ik66w"]
 [ext_resource type="Script" uid="uid://br4qpka5lcw0r" path="res://source/utils/types_converter.gd" id="4_immi0"]
-[ext_resource type="Script" uid="uid://c0rq8swn7i2j3" path="res://source/backend/clients_manager.gd" id="4_ni8xr"]
+[ext_resource type="Script" uid="uid://c0rq8swn7i2j3" path="res://source/backend/modules/networker/clients_manager.gd" id="4_ni8xr"]
+[ext_resource type="Script" uid="uid://dj1dyi2e387os" path="res://source/backend/modules/networker/packet_router.gd" id="5_vcogp"]
+[ext_resource type="Script" uid="uid://cxm7tmqjeqmtb" path="res://source/backend/modules/networker/packet-protocols/none_protocol.gd" id="6_f2s2a"]
+[ext_resource type="Script" uid="uid://dv3co3qncsbiq" path="res://source/backend/modules/networker/packet-protocols/status_protocol.gd" id="7_jsx54"]
 
 [node name="Backend" type="Node" unique_id=201930559 node_paths=PackedStringArray("_logger")]
 script = ExtResource("1_tpbuf")
@@ -26,13 +29,22 @@ metadata/_custom_type_script = "uid://bxsvhjksykxj7"
 script = ExtResource("4_ni8xr")
 metadata/_custom_type_script = "uid://c0rq8swn7i2j3"
 
-[node name="PacketRouter" type="Node" parent="Networker" unique_id=1166977335]
+[node name="PacketRouter" type="Node" parent="Networker" unique_id=787681655 node_paths=PackedStringArray("_protocols", "_clients_manager")]
+script = ExtResource("5_vcogp")
+_protocols = {
+0: NodePath("NoneProtocol"),
+1: NodePath("StatusProtocol")
+}
+_clients_manager = NodePath("../ClientsManager")
+metadata/_custom_type_script = "uid://dj1dyi2e387os"
 
-[node name="StatusProtocol" type="Node" parent="Networker/PacketRouter" unique_id=84458403]
+[node name="NoneProtocol" type="Node" parent="Networker/PacketRouter" unique_id=697875750]
+script = ExtResource("6_f2s2a")
+metadata/_custom_type_script = "uid://cxm7tmqjeqmtb"
 
-[node name="LoginProtocol" type="Node" parent="Networker/PacketRouter" unique_id=725434805]
-
-[node name="PlayProtocol" type="Node" parent="Networker/PacketRouter" unique_id=1970696677]
+[node name="StatusProtocol" type="Node" parent="Networker/PacketRouter" unique_id=341167416]
+script = ExtResource("7_jsx54")
+metadata/_custom_type_script = "uid://dv3co3qncsbiq"
 
 [node name="Utility" type="Node" parent="." unique_id=11778666]
 

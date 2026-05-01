@@ -1,4 +1,4 @@
-@icon("res://assets/minecraft/comparator.png")
+@icon("uid://clyal71chi4w1")
 class_name Backend
 extends BackendModule
 ## This node handles the backend of the server and provides basic functionality

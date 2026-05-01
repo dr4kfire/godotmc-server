@@ -12,11 +12,12 @@ enum ProtocolState {
 	NONE,
 	STATUS,
 	LOGIN,
+	TRANFER,
 	PLAY,
 	}
 
 
-var _active_streams: Dictionary[StreamPeerTCP, ProtocolState]
+var _active_streams: Dictionary[StreamPeerTCP, ClientsManager.ProtocolState]
 
  
 # Connection methods -------------------------------------------------------------------------------
@@ -48,7 +49,7 @@ func get_active_streams() -> Array[StreamPeerTCP]:
 
 
 ## Returns the [param stream]'s [enum ClientsManager.ProtocolState] 
-func get_stream_state(stream: StreamPeerTCP) -> ProtocolState:
+func get_stream_state(stream: StreamPeerTCP) -> ClientsManager.ProtocolState:
 	return _active_streams[stream]
 
 
