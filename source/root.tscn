@@ -5,3 +5,12 @@
 [node name="root" type="Node" unique_id=2073617426]
 
 [node name="Backend" parent="." unique_id=201930559 instance=ExtResource("1_50xm0")]
+
+[node name="PacketRouter" parent="Backend/Networker" parent_id_path=PackedInt32Array(201930559, 168973183) index="2" unique_id=787681655 node_paths=PackedStringArray("_protocols")]
+_protocols = {
+0: NodePath("NoneProtocol"),
+1: NodePath("StatusProtocol"),
+2: NodePath("LoginProtocol")
+}
+
+[editable path="Backend"]
