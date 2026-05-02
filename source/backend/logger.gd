@@ -23,7 +23,8 @@ func logdebug(msg: String) -> void:
 	
 	if msg.contains("\n"):
 		var sliced := msg.split("\n", true)
-		sliced[0] = "[color=dark_violet][b][debug]:[/b] %s[/color]" % sliced[0]
+		print_rich("[color=dark_violet][b][debug]:[/b] %s[/color]" % sliced[0])
+		sliced.remove_at(0)
 		for line in sliced:
 			print_rich("[color=dark_violet]          %s[/color]" % line)
 		return
@@ -37,7 +38,8 @@ func loginfo(msg: String) -> void:
 	
 	if msg.contains("\n"):
 		var sliced := msg.split("\n", true)
-		sliced[0] = "[color=white][b][ log ]:[/b] %s[/color]" % sliced[0]
+		print_rich("[color=white][b][ log ]:[/b] %s[/color]" % sliced[0])
+		sliced.remove_at(0)
 		for line in sliced:
 			print_rich("[color=white]          %s[/color]" % line)
 		return
@@ -51,7 +53,8 @@ func logwarning(msg: String) -> void:
 	
 	if msg.contains("\n"):
 		var sliced := msg.split("\n", true)
-		sliced[0] = "[color=dark_orange][b][ warn]:[/b] %s[/color]" % sliced[0]
+		print_rich("[color=dark_orange][b][ warn]:[/b] %s[/color]" % sliced[0])
+		sliced.remove_at(0)
 		for line in sliced:
 			print_rich("[color=dark_orange]          %s[/color]" % line)
 		return
@@ -65,7 +68,8 @@ func logerror(msg: String) -> void:
 	
 	if msg.contains("\n"):
 		var sliced := msg.split("\n", true)
-		sliced[0] = "[color=light_coral][b][error]:[/b] %s[/color]" % sliced[0]
+		print_rich("[color=light_coral][b][error]:[/b] %s[/color]" % sliced[0])
+		sliced.remove_at(0)
 		for line in sliced:
 			print_rich("[color=light_coral]          %s[/color]" % line)
 		return
