@@ -1,15 +1,16 @@
 [gd_scene format=3 uid="uid://c2v72uj21r247"]
 
 [ext_resource type="Script" uid="uid://vgr6gth8kkt5" path="res://source/backend/backend.gd" id="1_tpbuf"]
-[ext_resource type="Script" uid="uid://c73kgmlomtn1d" path="res://source/backend/modules/logger.gd" id="2_ik66w"]
-[ext_resource type="Script" uid="uid://bxsvhjksykxj7" path="res://source/backend/modules/networker/server_manager.gd" id="3_27lj5"]
+[ext_resource type="Script" uid="uid://c73kgmlomtn1d" path="res://source/backend/logger.gd" id="2_ik66w"]
+[ext_resource type="Script" uid="uid://bxsvhjksykxj7" path="res://source/backend/networker/server_manager.gd" id="3_27lj5"]
 [ext_resource type="Script" uid="uid://cdhmdvf8g6nrm" path="res://source/utils/bytes_formatter.gd" id="3_ik66w"]
 [ext_resource type="Script" uid="uid://br4qpka5lcw0r" path="res://source/utils/types_converter.gd" id="4_immi0"]
-[ext_resource type="Script" uid="uid://c0rq8swn7i2j3" path="res://source/backend/modules/networker/clients_manager.gd" id="4_ni8xr"]
-[ext_resource type="Script" uid="uid://dj1dyi2e387os" path="res://source/backend/modules/networker/packet_router.gd" id="5_vcogp"]
-[ext_resource type="Script" uid="uid://cxm7tmqjeqmtb" path="res://source/backend/modules/networker/packet-protocols/none_protocol.gd" id="6_f2s2a"]
-[ext_resource type="Script" uid="uid://dv3co3qncsbiq" path="res://source/backend/modules/networker/packet-protocols/status_protocol.gd" id="7_jsx54"]
-[ext_resource type="Script" uid="uid://blaobpsl7nah6" path="res://source/backend/modules/networker/packet-protocols/login_protocol.gd" id="8_6l1u5"]
+[ext_resource type="Script" uid="uid://c0rq8swn7i2j3" path="res://source/backend/networker/clients_manager.gd" id="4_ni8xr"]
+[ext_resource type="Script" uid="uid://dj1dyi2e387os" path="res://source/backend/networker/packet_router.gd" id="5_vcogp"]
+[ext_resource type="Script" uid="uid://cxm7tmqjeqmtb" path="res://source/backend/networker/packet-protocols/none_protocol.gd" id="6_f2s2a"]
+[ext_resource type="Script" uid="uid://dv3co3qncsbiq" path="res://source/backend/networker/packet-protocols/status_protocol.gd" id="7_jsx54"]
+[ext_resource type="Script" uid="uid://blaobpsl7nah6" path="res://source/backend/networker/packet-protocols/login_protocol.gd" id="8_6l1u5"]
+[ext_resource type="Script" uid="uid://cus4e3mgt1pyj" path="res://source/backend/networker/packet-protocols/config_protocol.gd" id="9_wr526"]
 
 [node name="Backend" type="Node" unique_id=201930559]
 script = ExtResource("1_tpbuf")
@@ -21,36 +22,41 @@ metadata/_custom_type_script = "uid://c73kgmlomtn1d"
 
 [node name="Networker" type="Node" parent="." unique_id=168973183]
 
-[node name="ServerManager" type="Node" parent="Networker" unique_id=672389084]
+[node name="ServerManager" type="Node" parent="Networker" unique_id=1027759104]
 script = ExtResource("3_27lj5")
 metadata/_custom_type_script = "uid://bxsvhjksykxj7"
 
-[node name="ClientsManager" type="Node" parent="Networker" unique_id=329573474]
+[node name="ClientsManager" type="Node" parent="Networker" unique_id=679333049]
 script = ExtResource("4_ni8xr")
 metadata/_custom_type_script = "uid://c0rq8swn7i2j3"
 
-[node name="PacketRouter" type="Node" parent="Networker" unique_id=787681655 node_paths=PackedStringArray("_protocols", "_clients_manager", "_logger")]
+[node name="PacketRouter" type="Node" parent="Networker" unique_id=1202520192 node_paths=PackedStringArray("_protocols", "_clients_manager", "_logger")]
 script = ExtResource("5_vcogp")
 _protocols = {
 0: NodePath("NoneProtocol"),
 1: NodePath("StatusProtocol"),
-2: NodePath("LoginProtocol")
+2: NodePath("LoginProtocol"),
+3: NodePath("ConfigProtocol")
 }
 _clients_manager = NodePath("../ClientsManager")
 _logger = NodePath("../../Logger")
 metadata/_custom_type_script = "uid://dj1dyi2e387os"
 
-[node name="NoneProtocol" type="Node" parent="Networker/PacketRouter" unique_id=697875750]
+[node name="NoneProtocol" type="Node" parent="Networker/PacketRouter" unique_id=912290232]
 script = ExtResource("6_f2s2a")
 metadata/_custom_type_script = "uid://cxm7tmqjeqmtb"
 
-[node name="StatusProtocol" type="Node" parent="Networker/PacketRouter" unique_id=341167416]
+[node name="StatusProtocol" type="Node" parent="Networker/PacketRouter" unique_id=1835302496]
 script = ExtResource("7_jsx54")
 metadata/_custom_type_script = "uid://dv3co3qncsbiq"
 
-[node name="LoginProtocol" type="Node" parent="Networker/PacketRouter" unique_id=1491254976]
+[node name="LoginProtocol" type="Node" parent="Networker/PacketRouter" unique_id=645449840]
 script = ExtResource("8_6l1u5")
 metadata/_custom_type_script = "uid://blaobpsl7nah6"
+
+[node name="ConfigProtocol" type="Node" parent="Networker/PacketRouter" unique_id=1901465125]
+script = ExtResource("9_wr526")
+metadata/_custom_type_script = "uid://cus4e3mgt1pyj"
 
 [node name="Utility" type="Node" parent="." unique_id=11778666]
 

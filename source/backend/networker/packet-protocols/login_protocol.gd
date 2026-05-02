@@ -23,7 +23,6 @@ enum {
 
 
 var _logger: BackendLogger
-var _temp_session_server_mojang_api_response 
 
 
 func get_response_packet(stream: StreamPeerTCP, request: PackedByteArray) -> PackedByteArray:

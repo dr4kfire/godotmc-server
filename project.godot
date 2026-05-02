@@ -39,6 +39,15 @@ display_server/driver.macos="headless"
 
 enabled=PackedStringArray()
 
+[file_customization]
+
+folder_colors={
+"res://assets/": "purple",
+"res://source/": "blue",
+"res://source/backend/": "red",
+"res://source/minecraft/": "green"
+}
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

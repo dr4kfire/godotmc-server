@@ -9,7 +9,7 @@ enum ProtocolState {
 	NONE = 0,
 	STATUS = 1,
 	LOGIN = 2,
-	TRANSFER = 3,
+	CONFIG = 3,
 	PLAY = 4
 	}
 
