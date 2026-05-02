@@ -49,7 +49,7 @@ func get_response_packet(stream: StreamPeerTCP, request: PackedByteArray) -> Pac
 			elif compress_packets:
 				return [] # TODO
 			
-			return _create_login_success_payload(player_uuid)
+			return _create_login_success_payload(player_uuid, player_name)
 		
 		LOGIN_ACK:
 			packets_router._clients_manager.set_stream_state(
@@ -66,10 +66,10 @@ func _create_encryption_request_payload() -> PackedByteArray:
 	return []
 
 
-func _create_login_success_payload(uuid: PackedByteArray) -> PackedByteArray:
+func _create_login_success_payload(uuid: PackedByteArray, username: String) -> PackedByteArray:
 	var payload: PackedByteArray
 	payload.append(0x02)
 	payload.append_array(uuid)
-	payload.append_array(TypesConverter.encode_string("Dr4kfire"))
+	payload.append_array(TypesConverter.encode_string(username))
 	payload.append(0x00)
 	return payload
