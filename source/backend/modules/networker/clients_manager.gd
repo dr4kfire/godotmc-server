@@ -12,7 +12,7 @@ enum ProtocolState {
 	NONE,
 	STATUS,
 	LOGIN,
-	TRANFER,
+	CONFIG,
 	PLAY,
 	}
 

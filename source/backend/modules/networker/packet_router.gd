@@ -16,6 +16,7 @@ enum ProtocolState {
 
 @export var _protocols: Dictionary[PacketsRouter.ProtocolState, PacketProtocol]
 @export var _clients_manager: ClientsManager
+@export var _logger: BackendLogger
 
 
 # Routing methods ----------------------------------------------------------------------------------

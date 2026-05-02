@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TextComponent" format=3 uid="uid://bchqug4t4pee1"]
+
+[ext_resource type="Script" uid="uid://dpxawn2e0d0bp" path="res://source/minecraft/resources/text_component.gd" id="1_28s7o"]
+
+[resource]
+script = ExtResource("1_28s7o")
+bold = true
+italic = true
+text = "Wow so this works! Amazing! :3"
+metadata/_custom_type_script = "uid://dpxawn2e0d0bp"

@@ -7,7 +7,7 @@ extends PacketProtocol
 ## this minecraft.wiki article[/url]
 
 
-@export_enum("1.21.10") var version: String = "1.21.10"
+@export var version_name: String = "GodotMC.1.21.10"
 @export var protocol_version: int = 773
 @export var max_players: int = 20
 @export var online_players: int = 0
@@ -22,15 +22,19 @@ enum {
 	}
 
 
-func get_response_packet(_stream: StreamPeerTCP, request: PackedByteArray) -> PackedByteArray:
+func get_response_packet(stream: StreamPeerTCP, request: PackedByteArray) -> PackedByteArray:
 	var decode := TypesConverter.decode_varint(request)
 	if decode.error:
 		return []
 	
+	var packets_router: PacketsRouter = self.get_parent()
 	match decode.value as int:
 		ID_STATUS_REQUEST:
 			return _handle_status_request()
 		ID_PING_REQUEST:
+			packets_router._clients_manager.set_stream_state(
+					stream, ClientsManager.ProtocolState.NONE
+					)
 			return _handle_ping_request(request.slice(1)) # Skip first byte (id)
 		
 	return []
@@ -45,7 +49,7 @@ func _handle_status_request() -> PackedByteArray:
 	
 	var data: Dictionary = {
 		"version": {
-			"name": version,
+			"name": version_name,
 			"protocol": protocol_version
 		},
 		"players": {
